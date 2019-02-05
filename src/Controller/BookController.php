@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Book;
+use App\Entity\User;
 use App\Form\BookType;
 use App\Repository\BookRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -53,9 +54,12 @@ class BookController extends AbstractController
      */
     public function show(Book $book): Response
     {
+        if($book->getStatus() == 1) {
+            $userID = $book->getBorrower();    
+        }
         return $this->render('book/show.html.twig', [
-            'book' => $book,
-        ]);
+            'book' => $book
+            ]);
     }
 
     /**

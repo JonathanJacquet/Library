@@ -1,10 +1,12 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Book{% endblock %}
+{% block title %}Détails livre{% endblock %}
 
 {% block body %}
-    <h1>Book</h1>
-
+<div class="text-center my-4">
+    <h2>Toutes les informations du livre</h2>
+    <a class="btn btn-info my-4" href="{{ path('book_index') }}">Retour à la liste</a>
+</div>
     <table class="table">
         <tbody>
             <tr>
@@ -12,31 +14,29 @@
                 <td>{{ book.id }}</td>
             </tr>
             <tr>
-                <th>Author</th>
+                <th>Auteur</th>
                 <td>{{ book.author }}</td>
             </tr>
             <tr>
-                <th>DatePublication</th>
-                <td>{{ book.datePublication ? book.datePublication|date('Y-m-d') : '' }}</td>
+                <th>Date de publication</th>
+                <td>{{ book.datePublication ? book.datePublication|date('d-m-Y') : '' }}</td>
             </tr>
             <tr>
-                <th>Resume</th>
+                <th>Résumé</th>
                 <td>{{ book.resume }}</td>
             </tr>
             <tr>
                 <th>Status</th>
-                <td>{{ book.status ? 'Yes' : 'No' }}</td>
+                <td>{{ book.status ? 'Disponible' : 'Indisponible' }}</td>
             </tr>
             <tr>
-                <th>Title</th>
+                <th>Titre</th>
                 <td>{{ book.title }}</td>
             </tr>
         </tbody>
     </table>
-
-    <a href="{{ path('book_index') }}">back to list</a>
-
-    <a href="{{ path('book_edit', {'id': book.id}) }}">edit</a>
-
+    <div class="d-flex">
+    <a class="btn btn-success" href="{{ path('book_edit', {'id': book.id}) }}">Modifier</a>
     {{ include('book/_delete_form.html.twig') }}
+    </div>
 {% endblock %}

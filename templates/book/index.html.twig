@@ -1,43 +1,45 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Book index{% endblock %}
+{% block title %}Liste des livres{% endblock %}
 
 {% block body %}
-    <h1>Book index</h1>
+<div class="text-center my-4">
+    <h2>La liste de tous les livres</h2>
+    <a class="btn btn-info my-4" href="{{ path('book_new') }}">Ajouter un livre</a>
+    <a class="btn btn-info my-4" href="{{ path('user_home') }}">Retourner à l'accueil</a>
+</div>
 
     <table class="table">
         <thead>
             <tr>
                 <th>Id</th>
-                <th>Author</th>
-                <th>DatePublication</th>
-                <th>Resume</th>
+                <th>Titre</th>
+                <th>Auteur</th>
+                <th>Date de publication</th>
+                <th>Résumé</th>
                 <th>Status</th>
-                <th>Title</th>
-                <th>actions</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
         {% for book in books %}
             <tr>
                 <td>{{ book.id }}</td>
+                <td><a href="{{ path('book_show', {'id': book.id}) }}">{{ book.title }}</a></td>
                 <td>{{ book.author }}</td>
-                <td>{{ book.datePublication ? book.datePublication|date('Y-m-d') : '' }}</td>
+                <td>{{ book.datePublication ? book.datePublication|date('d-m-Y') : '' }}</td>
                 <td>{{ book.resume }}</td>
-                <td>{{ book.status ? 'Yes' : 'No' }}</td>
-                <td>{{ book.title }}</td>
-                <td>
-                    <a href="{{ path('book_show', {'id': book.id}) }}">show</a>
-                    <a href="{{ path('book_edit', {'id': book.id}) }}">edit</a>
+                <td>{{ book.status ? 'Disponible' : 'Prêté' }}</td>
+                <td class="d-flex">
+                    <a class="btn btn-success" href="{{ path('book_edit', {'id': book.id}) }}">Modifier</a>
+                    <a class="btn btn-danger" href="{{ path('book_delete', {'id': book.id}) }}">Supprimer</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="7">no records found</td>
+                <td colspan="7">Aucun livre n'existe dans la base de données</td>
             </tr>
-        {% endfor %}
+        {% endfor %} 
         </tbody>
     </table>
-
-    <a href="{{ path('book_new') }}">Create new</a>
 {% endblock %}
