@@ -4,20 +4,21 @@
         <meta charset="UTF-8">
         <title>{% block title %}Bienvenue!{% endblock %}</title>
           {% block stylesheets %}
+            <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
             <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
           {% endblock %}
     </head>
     <header>
       <div class="jumbotron jumbotron-fluid">
         <div class="container">
-          <h1 class="display-4">Fluid jumbotron</h1>
-          <p class="lead">This is a modified jumbotron that occupies the entire horizontal space of its parent.</p>
+          <h1 class="display-4">GestBiblio</h1>
+          <p class="lead">"Application de gestion de bibliothèque"</p>
         </div>
       </div>
     </header>
     <body>
         {% block body %}{% endblock %}
-        <footer class="m-0">
+        <footer>
           <div class="jumbotron jumbotron-fluid">
             <div class="container d-flex justify-content-center">
               <p class="lead">&copy; Cassandra & Jonathan</p>
