@@ -14,6 +14,10 @@
                 <td>{{ book.id }}</td>
             </tr>
             <tr>
+                <th>Titre</th>
+                <td>{{ book.title }}</td>
+            </tr>
+            <tr>
                 <th>Auteur</th>
                 <td>{{ book.author }}</td>
             </tr>
@@ -30,8 +34,10 @@
                 <td>{{ book.status ? 'Disponible' : 'Prêté' }}</td>
             </tr>
             <tr>
-                <th>Titre</th>
-                <td>{{ book.title }}</td>
+                <th>Emprunteur</th>
+                {% for value in user %}
+                <td><a href="{{ path('user_show', {'id': value.id}) }}">{{ book.borrower }}</a></td>
+                {% endfor %}
             </tr>
         </tbody>
     </table>
