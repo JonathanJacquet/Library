@@ -31,6 +31,13 @@ class UserRepository extends ServiceEntityRepository
             ->getResult()
         ;
     }
+    // public function userLinkBook($user) {
+    //   return $this->createQueryBuilder("u")
+    //     ->Join("u.cardNumber", "b")
+    //     ->Where("u.cardNumber IN (:user)")
+    //     ->setParameter("user", $user)
+    //     ->getResult()
+    // }
 
     // /**
     //  * @return User[] Returns an array of User objects
