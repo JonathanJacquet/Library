@@ -7,8 +7,10 @@ use App\Entity\User;
 use App\Entity\Category;
 use App\Form\SearchType;
 use App\Form\BookType;
+use App\Form\UserType;
 use App\Repository\BookRepository;
 use App\Repository\CategoryRepository;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -24,29 +26,22 @@ class BookController extends AbstractController
      */
     public function index(BookRepository $bookRepository, CategoryRepository $categoryRepository, Request $request): Response
     {
-        $category = new Category();
-        $form = $this->createForm(SearchType::class, $category);
+        $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $categoryName = $_POST["search"]["name"];
-            $categorySearch = $categoryRepository->findOneBy(['name' => $categoryName]);
-            
-            return $this->render('book/index.html.twig', [
-                'books' => $bookRepository->findByCategory($categorySearch),
-                'form' => $form->createView(),
-                'category' => $category
-            ]);
+            $categorySearch = $form->getData();
+            $books = $bookRepository->findByIdJoinCategory($categorySearch);
+            var_dump($books);
+            return $this->redirectToRoute('book_index');
         }
-        else
-        {
+            $books = $bookRepository->findAll();
+
         return $this->render('book/index.html.twig', [
-            'books' => $bookRepository->findAll(),
-            'form' => $form->createView(),
-            'category' => $category->getName()
+            'books' => $books,
+            'form' => $form->createView()
         ]);
-        }
     }
 
     /**
@@ -76,14 +71,11 @@ class BookController extends AbstractController
     /**
      * @Route("/{id}", name="book_show", methods={"GET"})
      */
-    public function show(Book $book): Response
+    public function show(Book $book, UserRepository $userRepository): Response
     {
-        if($book->getStatus() == 1) 
-        {
-            $userID = $book->getBorrower();    
-        }
         return $this->render('book/show.html.twig', [
-            'book' => $book
+            'book' => $book, 
+            'user' => $userRepository->findByUserID($book->getBorrower())
             ]);
     }
 
