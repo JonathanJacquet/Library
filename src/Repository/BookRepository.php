@@ -22,10 +22,12 @@ class BookRepository extends ServiceEntityRepository
     /**
      * @return Book[] Returns an array of Book objects
      */
-    public function findByCategory($value)
+    public function findByIdJoinCategory($value)
     {
         return $this->createQueryBuilder('b')
-            ->andWhere('b.category = :val')
+            ->leftJoin('b.category', 'c')
+            ->addSelect('c')
+            ->andWhere('b.id = :val')
             ->setParameter('val', $value)
             ->orderBy('b.id', 'ASC')
             ->getQuery()
