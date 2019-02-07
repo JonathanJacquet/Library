@@ -30,9 +30,8 @@ class BookController extends AbstractController
 
         if($form->isSubmitted() && $form->isValid())
         {
-            $categoryName = $_POST["search"]["name"];
             $categorySearch = $categoryRepository->findOneBy(['name' => $categoryName]);
-            
+
             return $this->render('book/index.html.twig', [
                 'books' => $bookRepository->findByCategory($categorySearch),
                 'form' => $form->createView(),
@@ -44,11 +43,12 @@ class BookController extends AbstractController
         return $this->render('book/index.html.twig', [
             'books' => $bookRepository->findAll(),
             'form' => $form->createView(),
-            'category' => $category->getName()
+            'category' => $category->getName(),
+            'categories' => $categoryRepository->findAll()
+
         ]);
         }
     }
-
     /**
      * @Route("/new", name="book_new", methods={"GET","POST"})
      */
@@ -58,7 +58,7 @@ class BookController extends AbstractController
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) 
+        if ($form->isSubmitted() && $form->isValid())
         {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($book);
@@ -78,9 +78,9 @@ class BookController extends AbstractController
      */
     public function show(Book $book): Response
     {
-        if($book->getStatus() == 1) 
+        if($book->getStatus() == 1)
         {
-            $userID = $book->getBorrower();    
+            $userID = $book->getBorrower();
         }
         return $this->render('book/show.html.twig', [
             'book' => $book
@@ -95,7 +95,7 @@ class BookController extends AbstractController
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) 
+        if ($form->isSubmitted() && $form->isValid())
         {
             $this->getDoctrine()->getManager()->flush();
 
@@ -115,7 +115,7 @@ class BookController extends AbstractController
      */
     public function delete(Request $request, Book $book): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$book->getId(), $request->request->get('_token'))) 
+        if ($this->isCsrfTokenValid('delete'.$book->getId(), $request->request->get('_token')))
         {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($book);

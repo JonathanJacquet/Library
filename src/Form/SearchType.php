@@ -15,7 +15,30 @@ class SearchType extends AbstractType
             ->add('name', null, [
                 'label' => 'Catégorie'
             ])
+            // ->add('author', null, [
+            //     'label' => 'Auteur'
+            // ])
+            // ->add('datePublication', null, [
+            //     'label' => 'Date de publication'
+            // ])
+            // ->add('title', null, [
+            //     'label' => 'Titre'
+            // ])
         ;
+    }
+
+    public function buildFormAll(FormBuilderInterface $builder, array $opytions) {
+        $builder
+            ->add('author', null, [
+                'label' => 'Auteur'
+            ])
+            ->add('datePublication', null, [
+                'label' => 'Date de publication'
+            ])
+            ->add('title', null, [
+                'label' => 'Titre'
+            ])
+          ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
@@ -24,4 +47,5 @@ class SearchType extends AbstractType
             'data_class' => Category::class,
         ]);
     }
+
 }

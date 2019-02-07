@@ -36,6 +36,19 @@ class BookRepository extends ServiceEntityRepository
     /**
      * @return Book[] Returns an array of Book objects
      */
+    public function findByAll($value) {
+        return $this->createQueryBuilder('b')
+            ->andWhere('b.author = :val', 'b.datePublication = :val', 'b.title = :val', 'b.category = :val')
+            ->setParameter('val', $value)
+            ->orderBy('b.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+          ;
+    }
+
+    /**
+     * @return Book[] Returns an array of Book objects
+     */
     public function findByUser($value)
     {
         return $this->createQueryBuilder('b')
