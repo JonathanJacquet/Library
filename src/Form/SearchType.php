@@ -9,18 +9,21 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
 class SearchType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', EntityType::class, [
+            ->add('category', EntityType::class, [
                 'class' => Category::class,
-                'label' => 'Catégorie', 
-                'choice_value' => function (Category $category = null) {
-                    return $category ? $category->getId() : '';
-            }])
+                'choice_label' => 'name', 
+                'choice_value' => 'id'
+            ])
+            ->add('submit', SubmitType::class, [
+                'label' => 'Rechercher'
+            ])
         ;
     }
 
