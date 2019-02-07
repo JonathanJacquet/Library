@@ -44,6 +44,12 @@
                 <th>Code postal</th>
                 <td>{{ user.postalCode }}</td>
             </tr>
+            <tr>
+              <th>Livres empruntés</th>
+              {% for book in books %}
+              <td>{{ book.title }}</td>
+              {% endfor %}
+            </tr>
         </tbody>
     </table>
     {{ include('user/_delete_form.html.twig') }}

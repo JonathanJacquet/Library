@@ -3,10 +3,13 @@
 {% block title %}Détails livre{% endblock %}
 
 {% block body %}
-<div class="text-center my-4">
-    <h2>Toutes les informations du livre</h2>
-    <a class="btn btn-info my-4" href="{{ path('book_index') }}">Retour à la liste</a>
-</div>
+<div class="d-flex justify-content-center">
+  <div style="width:50%">
+    <div class="d-flex justify-content-center">
+      <h2>Toutes les informations du livre</h2>
+    </div>
+    <a class="btn btn-light border-dark my-4" href="{{ path('book_index') }}">Retour</a>
+
     <table class="table">
         <tbody>
             <tr>
@@ -27,7 +30,7 @@
             </tr>
             <tr>
                 <th>Status</th>
-                <td>{{ book.status ? 'Disponible' : 'Indisponible' }}</td>
+                <td>{{ book.status ? 'Disponible' : 'Prêté' }}</td>
             </tr>
             <tr>
                 <th>Titre</th>
@@ -39,4 +42,6 @@
     <a class="btn btn-success" href="{{ path('book_edit', {'id': book.id}) }}">Modifier</a>
     {{ include('book/_delete_form.html.twig') }}
     </div>
+  </div>
+</div>
 {% endblock %}
