@@ -11,17 +11,6 @@
     </div>
     <div class="d-flex justify-content-center align-items-center">
         {{ form_start(form) }}
-        {# <button class="btn btn-warning" type="submit">Rechercher</button>  #}
-        <div class="dropdown">
-          <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Trier par catégorie
-          </a>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-            {% for category in categories %}
-            <a class="dropdown-item" href="{{ path('book_index')}}">{{category.name}}</a>
-            {% endfor %}
-          </div>
-        </div>
         {{ form_end(form) }}
     </div>
     <div class="d-flex justify-content-between">
