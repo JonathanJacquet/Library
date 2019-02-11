@@ -23,13 +23,31 @@ class BookRepository extends ServiceEntityRepository
     /**
      * @return Book[] Returns an array of Book objects
      */
-    public function findByIdJoinCategory(Category $category)
+    public function findByIdJoinCategory($result = null)
     {
         return $this->createQueryBuilder('b')
             ->addSelect("c")
             ->leftJoin('b.category', 'c')
             ->andWhere('c.id = :val')
-            ->setParameter('val', $category)
+            ->andWhere('b.author = :val')
+            ->andWhere('b.title = :val')
+            ->setParameter('val', $result)
+            ->orderBy('b.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    /**
+     * @return Book[] Returns an array of Book objects
+     */
+    public function findByIdJoinUser($user)
+    {
+        return $this->createQueryBuilder('b')
+            ->addSelect("u")
+            ->leftJoin('b.borrower', 'u')
+            ->andWhere('u.id = :val')
+            ->setParameter('val', $user)
             ->orderBy('b.id', 'ASC')
             ->getQuery()
             ->getResult()
