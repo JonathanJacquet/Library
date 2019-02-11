@@ -24,7 +24,7 @@ class BookController extends AbstractController
     /**
      * @Route("/", name="book_index", methods={"GET", "POST"})
      */
-    public function index(BookRepository $bookRepository, CategoryRepository $categoryRepository, Request $request): Response
+    public function index(BookRepository $bookRepository, Request $request): Response
     {
         $form = $this->createForm(SearchType::class);
         $form->handleRequest($request);
@@ -32,11 +32,12 @@ class BookController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
             $categorySearch = $form->getData();
-            $books = $bookRepository->findByIdJoinCategory($categorySearch);
-            var_dump($books);
-            return $this->redirectToRoute('book_index');
+            $books = $bookRepository->findByIdJoinCategory($categorySearch["category"]);
         }
+        else
+        {
             $books = $bookRepository->findAll();
+        }
 
         return $this->render('book/index.html.twig', [
             'books' => $books,
