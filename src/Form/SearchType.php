@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Category;
+use App\Entity\Book;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -18,8 +19,25 @@ class SearchType extends AbstractType
         $builder
             ->add('category', EntityType::class, [
                 'class' => Category::class,
+                'placeholder' => 'Choisir une option',
+                'required' => false,
+                'multiple' =>true,
                 'choice_label' => 'name', 
                 'choice_value' => 'id'
+            ])
+            ->add('auteur', EntityType::class, [
+                'class' => Book::class,
+                'placeholder' => 'Choisir une option',
+                'required' => false,
+                'multiple' =>true,
+                'choice_label' => 'author'
+            ])
+            ->add('titre', EntityType::class, [
+                'class' => Book::class,
+                'placeholder' => 'Choisir une option',
+                'required' => false,
+                'multiple' =>true,
+                'choice_label' => 'title'
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Rechercher'

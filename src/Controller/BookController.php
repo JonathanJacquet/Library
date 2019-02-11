@@ -32,8 +32,7 @@ class BookController extends AbstractController
         if($form->isSubmitted() && $form->isValid())
         {
             $categorySearch = $form->getData();
-            $books = $bookRepository->findByIdJoinCategory($categorySearch["category"]);
-        }
+            $books = $bookRepository->findByIdJoinCategory($categorySearch['category']);        }
         else
         {
             $books = $bookRepository->findAll();
