@@ -22,7 +22,7 @@ class SearchType extends AbstractType
                 'placeholder' => 'Choisir une option',
                 'required' => false,
                 'multiple' =>true,
-                'choice_label' => 'name', 
+                'choice_label' => 'name',
                 'choice_value' => 'id'
             ])
             ->add('auteur', EntityType::class, [
@@ -45,9 +45,24 @@ class SearchType extends AbstractType
         ;
     }
 
+    public function buildFormAll(FormBuilderInterface $builder, array $opytions) {
+        $builder
+            ->add('author', null, [
+                'label' => 'Auteur'
+            ])
+            ->add('datePublication', null, [
+                'label' => 'Date de publication'
+            ])
+            ->add('title', null, [
+                'label' => 'Titre'
+            ])
+          ;
+    }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
         ]);
     }
+
 }

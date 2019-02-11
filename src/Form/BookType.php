@@ -29,11 +29,13 @@ class BookType extends AbstractType
                 'label' => 'Résumé'
             ])
             ->add('status', ChoiceType::class, [
-                'label' => 'Disponible', 
+                'label' => 'Disponible',
                 'choices' => [
-                    'Disponible' => true, 
+                    'Disponible' => true,
                     'Prêté' => false
                 ]
+                
+
             ])
             ->add('borrower', null, [
                 'label' => 'Nom emprunteur'

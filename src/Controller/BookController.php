@@ -43,7 +43,6 @@ class BookController extends AbstractController
             'form' => $form->createView()
         ]);
     }
-
     /**
      * @Route("/new", name="book_new", methods={"GET","POST"})
      */
@@ -53,7 +52,7 @@ class BookController extends AbstractController
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) 
+        if ($form->isSubmitted() && $form->isValid())
         {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($book);
@@ -74,7 +73,7 @@ class BookController extends AbstractController
     public function show(Book $book, UserRepository $userRepository): Response
     {
         return $this->render('book/show.html.twig', [
-            'book' => $book, 
+            'book' => $book,
             'user' => $userRepository->findByUserID($book->getBorrower())
             ]);
     }
@@ -87,8 +86,9 @@ class BookController extends AbstractController
         $form = $this->createForm(BookType::class, $book);
         $form->handleRequest($request);
 
-        if ($form->isSubmitted() && $form->isValid()) 
+        if ($form->isSubmitted() && $form->isValid())
         {
+      
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('book_index', [
@@ -107,7 +107,7 @@ class BookController extends AbstractController
      */
     public function delete(Request $request, Book $book): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$book->getId(), $request->request->get('_token'))) 
+        if ($this->isCsrfTokenValid('delete'.$book->getId(), $request->request->get('_token')))
         {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($book);
