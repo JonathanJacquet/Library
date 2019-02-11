@@ -27,7 +27,6 @@
                 <th>Date de publication</th>
                 <th>Résumé</th>
                 <th>Status</th>
-                <th>Emprunteur</th>
                 <th>Catégorie</th>
                 <th>Actions</th>
             </tr>
@@ -41,7 +40,6 @@
                 <td>{{ book.datePublication ? book.datePublication|date('d-m-Y-') : '' }}</td>
                 <td>{{ book.resume }}</td>
                 <td>{{ book.status ? 'Disponible' : 'Prêté' }}</td>
-                <td>{{ book.borrower }}</td>
                 <td>{{ book.category }}</td>
                 <td>
                   <div class="d-flex">
