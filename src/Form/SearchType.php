@@ -19,25 +19,8 @@ class SearchType extends AbstractType
         $builder
             ->add('category', EntityType::class, [
                 'class' => Category::class,
-                'placeholder' => 'Choisir une option',
-                'required' => false,
-                'multiple' =>true,
                 'choice_label' => 'name',
                 'choice_value' => 'id'
-            ])
-            ->add('auteur', EntityType::class, [
-                'class' => Book::class,
-                'placeholder' => 'Choisir une option',
-                'required' => false,
-                'multiple' =>true,
-                'choice_label' => 'author'
-            ])
-            ->add('titre', EntityType::class, [
-                'class' => Book::class,
-                'placeholder' => 'Choisir une option',
-                'required' => false,
-                'multiple' =>true,
-                'choice_label' => 'title'
             ])
             ->add('submit', SubmitType::class, [
                 'label' => 'Rechercher'
