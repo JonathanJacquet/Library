@@ -29,8 +29,6 @@ class BookRepository extends ServiceEntityRepository
             ->addSelect("c")
             ->leftJoin('b.category', 'c')
             ->andWhere('c.id = :val')
-            ->andWhere('b.author = :val')
-            ->andWhere('b.title = :val')
             ->setParameter('val', $result)
             ->orderBy('b.id', 'ASC')
             ->getQuery()
