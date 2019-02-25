@@ -3,14 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Book;
-use App\Entity\User;
+use App\Entity\Administrator;
 use App\Entity\Category;
+use App\Entity\Library;
 use App\Form\SearchType;
 use App\Form\BookType;
-use App\Form\UserType;
+use App\Form\AdministratorType;
 use App\Repository\BookRepository;
 use App\Repository\CategoryRepository;
-use App\Repository\UserRepository;
+use App\Repository\AdministratorRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -70,11 +71,11 @@ class BookController extends AbstractController
     /**
      * @Route("/{id}", name="book_show", methods={"GET"})
      */
-    public function show(Book $book, UserRepository $userRepository): Response
+    public function show(Book $book, AdministratorRepository $AdministratorRepository): Response
     {
         return $this->render('book/show.html.twig', [
             'book' => $book,
-            'user' => $userRepository->findByUserID($book->getBorrower())
+            'Administrator' => $AdministratorRepository->findByAdministratorID($book->getBorrower())
             ]);
     }
 
@@ -88,7 +89,7 @@ class BookController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid())
         {
-      
+
             $this->getDoctrine()->getManager()->flush();
 
             return $this->redirectToRoute('book_index', [

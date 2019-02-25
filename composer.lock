@@ -4134,7 +4134,7 @@
                 "symfony/expression-language": "For using the expression voter",
                 "symfony/http-foundation": "",
                 "symfony/ldap": "For using LDAP integration",
-                "symfony/validator": "For using the user password constraint"
+                "symfony/validator": "For using the Administrator password constraint"
             },
             "type": "library",
             "extra": {
@@ -4312,7 +4312,7 @@
                 "symfony/security-csrf": "^3.4.11|^4.0.11"
             },
             "suggest": {
-                "symfony/routing": "For using the HttpUtils class to create sub-requests, redirect the user, and match URLs",
+                "symfony/routing": "For using the HttpUtils class to create sub-requests, redirect the Administrator, and match URLs",
                 "symfony/security-csrf": "For using tokens to protect authentication/logout attempts"
             },
             "type": "library",

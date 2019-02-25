@@ -42,7 +42,7 @@ class Book
     private $title;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="books")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Administrator", inversedBy="books")
      */
     private $borrower;
 
@@ -51,6 +51,11 @@ class Book
      * @ORM\JoinColumn(nullable=false)
      */
     private $category;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Library", inversedBy="books")
+     */
+    private $idLibrary;
 
     public function getId(): ?int
     {
@@ -117,12 +122,12 @@ class Book
         return $this;
     }
 
-    public function getBorrower(): ?User
+    public function getBorrower(): ?Administrator
     {
         return $this->borrower;
     }
 
-    public function setBorrower(?User $borrower): self
+    public function setBorrower(?Administrator $borrower): self
     {
         $this->borrower = $borrower;
 
@@ -144,5 +149,17 @@ class Book
     public function __toString()
     {
         return $this->title;
+    }
+
+    public function getIdLibrary(): ?Library
+    {
+        return $this->idLibrary;
+    }
+
+    public function setIdLibrary(?Library $idLibrary): self
+    {
+        $this->idLibrary = $idLibrary;
+
+        return $this;
     }
 }

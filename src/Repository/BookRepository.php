@@ -39,13 +39,13 @@ class BookRepository extends ServiceEntityRepository
     /**
      * @return Book[] Returns an array of Book objects
      */
-    public function findByIdJoinUser($user)
+    public function findByIdJoinAdministrator($Administrator)
     {
         return $this->createQueryBuilder('b')
             ->addSelect("u")
             ->leftJoin('b.borrower', 'u')
             ->andWhere('u.id = :val')
-            ->setParameter('val', $user)
+            ->setParameter('val', $Administrator)
             ->orderBy('b.id', 'ASC')
             ->getQuery()
             ->getResult()
@@ -68,7 +68,7 @@ class BookRepository extends ServiceEntityRepository
     /**
      * @return Book[] Returns an array of Book objects
      */
-    public function findByUser($value)
+    public function findByAdministrator($value)
     {
         return $this->createQueryBuilder('b')
             ->andWhere('b.borrower = :val')

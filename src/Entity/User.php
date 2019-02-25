@@ -2,14 +2,13 @@
 
 namespace App\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -19,172 +18,96 @@ class User
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=180, unique=true)
      */
-    private $adress;
+    private $email;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="json")
      */
-    private $age;
+    private $roles = [];
 
     /**
-     * @ORM\Column(type="integer")
+     * @var string The hashed password
+     * @ORM\Column(type="string")
      */
-    private $cardNumber;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $city;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $firstname;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $name;
-
-    /**
-     * @ORM\Column(type="integer")
-     */
-    private $postalCode;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Book", mappedBy="borrower")
-     */
-    private $books;
-
-    public function __construct()
-    {
-        $this->books = new ArrayCollection();
-    }
+    private $password;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getAdress(): ?string
+    public function getEmail(): ?string
     {
-        return $this->adress;
+        return $this->email;
     }
 
-    public function setAdress(string $adress): self
+    public function setEmail(string $email): self
     {
-        $this->adress = $adress;
-
-        return $this;
-    }
-
-    public function getAge(): ?int
-    {
-        return $this->age;
-    }
-
-    public function setAge(int $age): self
-    {
-        $this->age = $age;
-
-        return $this;
-    }
-
-    public function getCardNumber(): ?int
-    {
-        return $this->cardNumber;
-    }
-
-    public function setCardNumber(int $cardNumber): self
-    {
-        $this->cardNumber = $cardNumber;
-
-        return $this;
-    }
-
-    public function getCity(): ?string
-    {
-        return $this->city;
-    }
-
-    public function setCity(string $city): self
-    {
-        $this->city = $city;
-
-        return $this;
-    }
-
-    public function getFirstname(): ?string
-    {
-        return $this->firstname;
-    }
-
-    public function setFirstname(string $firstname): self
-    {
-        $this->firstname = $firstname;
-
-        return $this;
-    }
-
-    public function getName(): ?string
-    {
-        return $this->name;
-    }
-
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    public function getPostalCode(): ?int
-    {
-        return $this->postalCode;
-    }
-
-    public function setPostalCode(int $postalCode): self
-    {
-        $this->postalCode = $postalCode;
+        $this->email = $email;
 
         return $this;
     }
 
     /**
-     * @return Collection|Book[]
+     * A visual identifier that represents this user.
+     *
+     * @see UserInterface
      */
-    public function getBooks(): Collection
+    public function getUsername(): string
     {
-        return $this->books;
+        return (string) $this->email;
     }
 
-    public function addBook(Book $book): self
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
     {
-        if (!$this->books->contains($book)) {
-            $this->books[] = $book;
-            $book->setBorrower($this);
-        }
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
 
         return $this;
     }
 
-    public function removeBook(Book $book): self
+    /**
+     * @see UserInterface
+     */
+    public function getPassword(): string
     {
-        if ($this->books->contains($book)) {
-            $this->books->removeElement($book);
-            // set the owning side to null (unless already changed)
-            if ($book->getBorrower() === $this) {
-                $book->setBorrower(null);
-            }
-        }
+        return (string) $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
 
         return $this;
     }
 
-    public function __toString()
+    /**
+     * @see UserInterface
+     */
+    public function getSalt()
     {
-        return $this->name;
+        // not needed when using the "bcrypt" algorithm in security.yaml
+    }
+
+    /**
+     * @see UserInterface
+     */
+    public function eraseCredentials()
+    {
+        // If you store any temporary, sensitive data on the user, clear it here
+        // $this->plainPassword = null;
     }
 }
