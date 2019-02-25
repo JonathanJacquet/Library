@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}User{% endblock %}
+{% block title %}Administrator{% endblock %}
 
 {% block body %}
 <div class="d-flex justify-content-center">
@@ -8,41 +8,41 @@
     <div class="d-flex justify-content-center">
     <h1>Information du membre</h1>
   </div>
-  <a href="{{ path('user_index') }}" class="btn btn-light border-dark">Retour</a>
+  <a href="{{ path('Administrator_index') }}" class="btn btn-light border-dark">Retour</a>
 
     <table class="table">
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ user.id }}</td>
+                <td>{{ Administrator.id }}</td>
             </tr>
             <tr>
               <th>Nom</th>
-              <td>{{ user.name }}</td>
+              <td>{{ Administrator.name }}</td>
             </tr>
             <tr>
               <th>Prénom</th>
-              <td>{{ user.firstname }}</td>
+              <td>{{ Administrator.firstname }}</td>
             </tr>
             <tr>
               <th>Age</th>
-              <td>{{ user.age }}</td>
+              <td>{{ Administrator.age }}</td>
             </tr>
             <tr>
               <th>N° de carte</th>
-              <td>{{ user.cardNumber }}</td>
+              <td>{{ Administrator.cardNumber }}</td>
             </tr>
             <tr>
                 <th>Adresse</th>
-                <td>{{ user.adress }}</td>
+                <td>{{ Administrator.adress }}</td>
             </tr>
             <tr>
                 <th>Ville</th>
-                <td>{{ user.city }}</td>
+                <td>{{ Administrator.city }}</td>
             </tr>
             <tr>
                 <th>Code postal</th>
-                <td>{{ user.postalCode }}</td>
+                <td>{{ Administrator.postalCode }}</td>
             </tr>
             <tr>
               <th>Livres empruntés</th>

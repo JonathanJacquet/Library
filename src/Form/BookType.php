@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use app\Entity\Library;
 use App\Entity\Book;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -34,8 +35,6 @@ class BookType extends AbstractType
                     'Disponible' => true,
                     'Prêté' => false
                 ]
-                
-
             ])
             ->add('borrower', null, [
                 'label' => 'Nom emprunteur'
@@ -43,6 +42,9 @@ class BookType extends AbstractType
             ->add('category', null, [
                 'label' => 'Catégorie'
             ])
+            // ->add('cityLibrary', null, [
+            //   'label' => 'Lieu'
+            // ])
         ;
     }
 

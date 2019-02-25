@@ -38,8 +38,8 @@
             </tr>
             <tr>
                 <th>Emprunteur</th>
-                {% for value in user %}
-                <td><a href="{{ path('user_show', {'id': value.id}) }}">{{ book.borrower }}</a></td>
+                {% for value in Administrator %}
+                <td><a href="{{ path('Administrator_show', {'id': value.id}) }}">{{ book.borrower }}</a></td>
                 {% endfor %}
             </tr>
         </tbody>

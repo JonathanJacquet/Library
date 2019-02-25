@@ -2,12 +2,12 @@
 
 namespace App\Form;
 
-use App\Entity\User;
+use App\Entity\Administrator;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class UserType extends AbstractType
+class AdministratorType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -17,6 +17,9 @@ class UserType extends AbstractType
             ])
             ->add('firstname', null, [
               'label' => 'Prénom'
+            ])
+            ->add('password', null, [
+              'label' => 'Mot de passe'
             ])
             ->add('age', null, [
               'label'=> 'Age'
@@ -39,7 +42,7 @@ class UserType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => User::class,
+            'data_class' => Administrator::class,
         ]);
     }
 }

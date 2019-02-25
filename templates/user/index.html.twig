@@ -9,8 +9,8 @@
     <h1>Liste des membres</h1>
   </div>
   <div class="d-flex justify-content-between">
-    <a href="{{ path('user_new') }}" class="btn btn-light border-dark mb-2">Ajouter un membre</a>
-    <a href="{{ path('user_home') }}" class="btn btn-light border-dark mb-2">Retour</a>
+    <a href="{{ path('Administrator_new') }}" class="btn btn-light border-dark mb-2">Ajouter un membre</a>
+    <a href="{{ path('Administrator_home') }}" class="btn btn-light border-dark mb-2">Retour</a>
   </div>
 
     <table class="table">
@@ -27,19 +27,19 @@
             </tr>
         </thead>
         <tbody>
-        {% for user in users %}
+        {% for Administrator in Administrators %}
             <tr>
 
-                <td><a href="{{ path('user_show', {'id': user.id}) }}">{{ user.name }}</a></td>
-                <td>{{ user.firstname }}</td>
-                <td>{{ user.age }}</td>
-                <td>{{ user.cardNumber }}</td>
-                <td>{{ user.adress }}</td>
-                <td>{{ user.city }}</td>
-                <td>{{ user.postalCode }}</td>
+                <td><a href="{{ path('Administrator_show', {'id': Administrator.id}) }}">{{ Administrator.name }}</a></td>
+                <td>{{ Administrator.firstname }}</td>
+                <td>{{ Administrator.age }}</td>
+                <td>{{ Administrator.cardNumber }}</td>
+                <td>{{ Administrator.adress }}</td>
+                <td>{{ Administrator.city }}</td>
+                <td>{{ Administrator.postalCode }}</td>
                 <td>
-                    <a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-warning"><i class="far fa-edit fa-1x"></i></a>
-                    <a href="{{ path('user_delete', {'id': user.id}) }}" class="btn btn-danger"><i class="fas fa-trash fa-1x"></i></a>
+                    <a href="{{ path('Administrator_edit', {'id': Administrator.id}) }}" class="btn btn-warning"><i class="far fa-edit fa-1x"></i></a>
+                    <a href="{{ path('Administrator_delete', {'id': Administrator.id}) }}" class="btn btn-danger"><i class="fas fa-trash fa-1x"></i></a>
                 </td>
             </tr>
         {% else %}
